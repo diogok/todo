@@ -1,14 +1,16 @@
-=TODO=
+# TODO
 
 Simplest possible TODO list management tool.
 
-==Usage==
+## Usage
 
-Download [todo.lua](todo) and put it in your path, and add executable permission
+### CLI
 
-    $ wget todo.lua
-    $ chmod +x todo.lua
-    $ sudo mv todo.lua /usr/bin/todo
+Download [todo](http://github.com/diogok/todo/raw/master/todo.lua) and put it in your path, and add executable permission
+
+    $ wget http://github.com/diogok/rodo/raw/master/todo.lua -O todo
+    $ chmod +x todo
+    $ sudo mv todo /usr/bin/todo
 
 To add an item:
     
