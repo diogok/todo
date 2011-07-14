@@ -21,7 +21,7 @@ To list todo list:
     $ todo
     01 - Must test this awesome tool
 
-To "done" and item:
+To "done" an item:
     
     $ todo -d 01
 
