@@ -36,7 +36,7 @@ iter() {
 for dir in $(ls) 
 do
     if [ -d $dir ]; then
-        REV=$(curl "$URL/_design/$dir" | egrep -o -e '"_rev":"[^"]+"')
+        REV=$(curl -s "$URL/_design/$dir" | egrep -o -e '"_rev":"[^"]+"')
         REV=${REV/'"_rev":'/}
         REV=${REV//\"/}
         [[ "$REV" != "" ]] && echo $REV > $dir/_rev

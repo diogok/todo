@@ -2,6 +2,14 @@
 
 Simplest possible TODO list management tool.
 
+## Dependencies
+
+todo uses local couchdb as storage, how to install:
+
+    $ sudo aptitude install couchdb
+
+Right now it expects it to run on default port, but soon to be configurable
+
 ## Usage
 
 ### CLI
