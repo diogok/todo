@@ -3,7 +3,7 @@ DEV="localhost:5984"
 PRO="manifesto.couchone.com"
 USER="admin"
 
-if [ $3 != "nopass"]; then
+if [ $3 != "nopass" ]; then
     echo "Password:"
     read -s PASS
 fi
