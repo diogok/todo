@@ -76,11 +76,11 @@ function jsonfy(item)
 end
 
 function get(couch,file) 
-    os.execute("curl -s ".. couch .."/_design/app/_list/csv/by_id > ".. file)
+    os.execute("curl -s ".. couch .."/_design/app/_list/csv/ordered > ".. file)
 end
 
 function post(couch,file)
-    os.execute("curl -s -X POST ".. couch .." -d @" .. file .. " -H 'Content-Type: application/json' > /dev/nullt s:wq ")
+    os.execute("curl -s -X POST ".. couch .." -d @" .. file .. " -H 'Content-Type: application/json' > /dev/null ")
 end
 
 function sync(db,remote)
