@@ -5,8 +5,7 @@ dofile("todo.lua")
 os.remove("test.db")
 db = "http://localhost:5984/todo_test" 
 os.execute("curl -X DELETE ".. db)
-
-setup(db)
+os.execute("curl -X PUT ".. db)
 os.execute("cd couch && ./push.sh dev todo_test nopass")
 
 add(db,"Foo")

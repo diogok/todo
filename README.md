@@ -20,6 +20,10 @@ Download [todo](http://github.com/diogok/todo/raw/master/todo.lua) and put it in
     $ chmod +x todo
     $ sudo mv todo /usr/bin/todo
 
+You must configure it so it creates the databases
+
+    $ todo -c
+
 To add an item:
     
     $ todo Must test this awesome tool

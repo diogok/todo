@@ -83,15 +83,14 @@ function post(couch,file)
     os.execute("curl -s -X POST ".. couch .." -d @" .. file .. " -H 'Content-Type: application/json' > /dev/null ")
 end
 
-function sync(db,remote)
-end
-
-function setup(db)
-    os.execute("curl -s -X PUT ".. db .." > /dev/null")
+function config(couch,db, remote)
+    os.execute("curl -s -X POST ".. couch .."/_replicate -d '{\"source\":\"".. remote .. "/todo_master\",\"target\":\"".. db .."\",\"create_target\":true}' -H 'Content-Type: application/json' > /dev/null")
 end
 
 if arg[0] == "todo.lua" or arg[0] == "todo" then
-    local db = "http://localhost:5984/todo" 
+    local couch = "http://localhost:5984" 
+    local db = "todo"
+    local couchdb = couch .. "/" .. db
     local remote = "http://manifesto.couchone.com/";
 
     if arg[1] == "-h" or arg[1] == "--help" then
@@ -99,16 +98,18 @@ if arg[0] == "todo.lua" or arg[0] == "todo" then
         print("\ttodo description# add description to todo list")
         print("\ttodo -d 01 # mark item 01 as done")
     elseif arg[1] == "-d" or arg[1] == "--done" then
-        done(db,arg[2])
+        done(couchdb,arg[2])
         print("Ok, done.")
-    elseif arg[1] == "-s" or arg[1] == "--sync" then
+    elseif arg[1] == "-c" or arg[1] == "--config" then
+        print("Ok, configuring.")
+        config(couch,db,remote)
     elseif arg[1] ~= nil then
         local item = table.concat(arg," ")
-        add(db,item)
+        add(couchdb,item)
         print("Ok, added.")
     else
         print("Ok, listing.")
-        local items = list(db)
+        local items = list(couchdb)
         for k, v in pairs(items) do
             if v[4] == "todo" then
                 print(k .. " - " .. v[3])
