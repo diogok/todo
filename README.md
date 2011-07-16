@@ -20,7 +20,7 @@ Download [todo](http://github.com/diogok/todo/raw/master/todo.lua) and put it in
     $ chmod +x todo
     $ sudo mv todo /usr/bin/todo
 
-You must configure it so it creates the databases
+You must configure it so it creates the databases, only on first run (configs will be wrinte to ~/.todorc):
 
     $ todo -c
 
