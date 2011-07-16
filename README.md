@@ -8,27 +8,25 @@ todo uses local couchdb as storage, how to install:
 
     $ sudo aptitude install couchdb
 
-Right now it expects it to run on default port, but soon to be configurable
+## Installing 
 
-## Usage
-
-### CLI
-
-Download [todo](http://github.com/diogok/todo/raw/master/todo.lua) and put it in your path, and add executable permission
+Download [todo](http://github.com/diogok/todo/raw/master/todo.lua), put it in your path and add executable permission:
 
     $ wget http://github.com/diogok/rodo/raw/master/todo.lua -O todo
     $ chmod +x todo
     $ sudo mv todo /usr/bin/todo
 
-You must configure it so it creates the databases, only on first run (configs will be wrinte to ~/.todorc):
+You must configure it so it creates the databases needed, only on first run (config will be writen to ~/.todorc):
 
     $ todo -c
+
+## Usage
 
 To add an item:
     
     $ todo Must test this awesome tool
 
-To list todo list:
+To list the todo list:
 
     $ todo
     01 - Must test this awesome tool

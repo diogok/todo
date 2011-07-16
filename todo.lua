@@ -124,7 +124,6 @@ if arg[0] == string.sub( debug.getinfo(1,'S').source,2) then
     end
 
     local couchdb = userConfig["localCouch"] .. "/" .. userConfig["localDb"]
-
     if arg[1] == "-h" or arg[1] == "--help" then
         print("Usage:  todo # list items")
         print("\ttodo description# add description to todo list")
