@@ -106,7 +106,7 @@ function config(props)
     os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. props["remoteCouch"] .. "/todo_master\",\"target\":\"".. props["localDb"] .."\",\"create_target\":true}' -H 'Content-Type: application/json' > /dev/null")
 end
 
-if arg[0] == "todo.lua" or arg[0] == "todo" then
+if arg[0] == string.sub( debug.getinfo(1,'S').source,2) then
     local defaultConfig = {
         [ "localCouch" ]= "http://localhost:5984",
         [ "localDb" ] = "todo",
