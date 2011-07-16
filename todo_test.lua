@@ -19,7 +19,7 @@ props = {
     [ "localDb" ] = "todo_test",
     [ "remoteCouch" ] = "http://localhost:5984"
 }
-config("tmprc",props)
+config(props)
 
 add(db,"Foo")
 add(db,"Bar")
