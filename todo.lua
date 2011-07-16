@@ -83,15 +83,47 @@ function post(couch,file)
     os.execute("curl -s -X POST ".. couch .." -d @" .. file .. " -H 'Content-Type: application/json' > /dev/null ")
 end
 
-function config(couch,db, remote)
-    os.execute("curl -s -X POST ".. couch .."/_replicate -d '{\"source\":\"".. remote .. "/todo_master\",\"target\":\"".. db .."\",\"create_target\":true}' -H 'Content-Type: application/json' > /dev/null")
+function writeConfig(rc,props) 
+    local file, r = io.open(rc,"w")
+    for k, v in pairs( props ) do
+        file:write(k .. "=".. v .."\n");
+    end
+    file:close();
+end
+
+function readConfig(rc,props)
+    if props == nil then props = {} end
+    local file = io.open(rc,"r")
+    for line in file:lines() do
+        local kv = explode(line,"=")
+        props[kv[1]] = kv[2]
+    end
+    file:close()
+    return props
+end
+
+function config(props)
+    os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. props["remoteCouch"] .. "/todo_master\",\"target\":\"".. props["localDb"] .."\",\"create_target\":true}' -H 'Content-Type: application/json' > /dev/null")
 end
 
 if arg[0] == "todo.lua" or arg[0] == "todo" then
-    local couch = "http://localhost:5984" 
-    local db = "todo"
-    local couchdb = couch .. "/" .. db
-    local remote = "http://manifesto.couchone.com/";
+    local defaultConfig = {
+        [ "localCouch" ]= "http://localhost:5984",
+        [ "localDb" ] = "todo",
+        [ "remoteCouch" ] = "http://manifesto.couchone.com"
+    }
+    local userConfig = defaultConfig ;
+
+    local rc = os.getenv("HOME") .. "/.todorc" ;
+    local file = io.open(rc,"r")
+    if file == nil then
+        writeConfig(rc,userConfig)
+    else
+        file:close()
+        readConfig(rc,userConfig)
+    end
+
+    local couchdb = userConfig["localCouch"] .. "/" .. userConfig["localDb"]
 
     if arg[1] == "-h" or arg[1] == "--help" then
         print("Usage:  todo # list items")
@@ -102,7 +134,7 @@ if arg[0] == "todo.lua" or arg[0] == "todo" then
         print("Ok, done.")
     elseif arg[1] == "-c" or arg[1] == "--config" then
         print("Ok, configuring.")
-        config(couch,db,remote)
+        config(userConfig)
     elseif arg[1] ~= nil then
         local item = table.concat(arg," ")
         add(couchdb,item)

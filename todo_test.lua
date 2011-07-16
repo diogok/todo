@@ -2,11 +2,24 @@
 
 dofile("todo.lua")
 
-os.remove("test.db")
+props = {
+    [ "Foo" ]="Bar",
+    [ "Yo" ]="Eu"
+}
+os.remove("tmprc")
+writeConfig("tmprc", props)
+props2 = readConfig("tmprc")
+assert(props2["Foo"] == "Bar")
+assert(props2["Yo"] == "Eu")
+os.remove("tmprc")
+
 db = "http://localhost:5984/todo_test" 
-os.execute("curl -X DELETE ".. db)
-os.execute("curl -X PUT ".. db)
-os.execute("cd couch && ./push.sh dev todo_test nopass")
+props = {
+    [ "localCouch" ]= "http://localhost:5984",
+    [ "localDb" ] = "todo_test",
+    [ "remoteCouch" ] = "http://localhost:5984"
+}
+config("tmprc",props)
 
 add(db,"Foo")
 add(db,"Bar")
@@ -22,5 +35,6 @@ for k,v in pairs(list1) do
 end
 
 os.execute("curl -X DELETE ".. db)
+os.remove("tmprc")
 
 print("Passed");
