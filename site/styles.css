@@ -1,1 +1,21 @@
-* {}
+body {
+    font-family: Helvetica;
+    font-size: 12px;
+}
+form {
+    display: table;
+}
+
+form input {
+    border: 1px #ccc solid;
+    padding: 5px;
+    width: 50%;
+    float: right;
+}
+
+form label {
+    float: left;
+    clear: left;
+    margin-top: 10px;
+}
+
