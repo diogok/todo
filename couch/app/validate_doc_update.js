@@ -1,5 +1,5 @@
 function (newDoc,oldDoc,userCtx) {
-    var fields= ["status","_rev","_id","content","timestamp","_revisions"];
+    var fields= ["status","_rev","_id","content","timestamp","_revisions","done_timestamp"];
     for(var i  in newDoc) {
         var ok = false;
         for(var f in fields) {

@@ -40,6 +40,7 @@ function done(db,n)
     for k, v in pairs(items) do
         if k == tonumber(n) then
             v[4] = "done"
+            v[5] = os.time();
             updateItem(db,v);
         end
     end
@@ -63,8 +64,8 @@ function list(db)
 end
 
 function item2json(item) 
-    if item[5] ~= nil then
-        return '{"_id":"'.. item[1] ..'","_rev":"'.. item[5] ..'","timestamp":"'.. item[2] ..'","content": "'.. item[3] ..'","status":"'.. item[4] ..'"}'
+    if item[6] ~= nil then
+        return '{"_id":"'.. item[1] ..'","_rev":"'.. item[6] ..'","done_timestamp":"'.. item[5] ..'","timestamp":"'.. item[2] ..'","content": "'.. item[3] ..'","status":"'.. item[4] ..'"}'
     else
         return '{"_id":"'.. item[1] ..'","timestamp":"'.. item[2] ..'","content": "'.. item[3] ..'","status":"'.. item[4] ..'"}'
     end
@@ -79,7 +80,7 @@ function get(couch,file)
 end
 
 function post(couch,file)
-    os.execute("curl -s -X POST ".. couch .." -d @" .. file .. " -H 'Content-Type: application/json' > /dev/null")
+    os.execute("curl -s -X POST ".. couch .." -d @" .. file .. " -H 'Content-Type: application/json' >> /dev/null")
 end
 
 function writeConfig(rc,props) 

@@ -28,6 +28,7 @@ $(function(){
 
     $("#add").click(function(){
         var content = $("#input").val();
+        if(content.length < 1) return;
         var item = {content: content, timestamp: new Date().getTime(), status: "todo" };
         post(item, function(r) {
             item._rev = r.rev;
@@ -41,6 +42,7 @@ $(function(){
         var id = line.id;
         var item = items[id];
         item.status = "done";
+        item.done_timestamp = new Date().getTime();
         post(item,function(){
             delete items[id];
             $(line).remove();
