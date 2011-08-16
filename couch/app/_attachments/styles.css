@@ -8,16 +8,47 @@ form {
     display: table;
 }
 
-form input , form button{
+input , button{
     border: 1px #ccc solid;
     padding: 5px;
     margin-left: 2px;
 }
 
-form button {
+button {
     border: none;
+    width: 65px;
 }
-form input {
+
+input {
     width: 400px;
 }
 
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 10px;
+}
+
+ul li {
+    list-style: none;
+    border-bottom: 1px #ccc solid;
+    clear: both;
+    display: table;
+    margin: 8px 0 0 5px;
+    width: 475px;
+}
+
+.content {
+    font-weight: bolder;
+    font-size: 20px;
+}
+
+.date {
+    font-size: 10px;
+    display: block;
+}
+
+.done {
+    float: right;
+}

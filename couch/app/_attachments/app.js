@@ -3,7 +3,14 @@ $(function(){
     $("form").submit(function(){ return false; });
 
     function ins(item) {
-        $("#todo").append("<li>"+item.content+"</li>");
+        var date = new Date(item.timestamp);
+        var dateStr = date.getMonth()+"/"+date.getDay()+" "+date.getHours()+":"+date.getMinutes();
+        var html = "<li>";
+        html += "<span class='date'>"+dateStr+"</span> ";
+        html += "<span class='content'>"+item.content+"</span> ";
+        html += "<button class='done'>Done</button> ";
+        html += "</li>";
+        $("#todo").append(html);
     }
 
     $("#add").click(function(){
