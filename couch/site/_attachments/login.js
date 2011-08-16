@@ -6,8 +6,16 @@ $(function(){
         $("#login").click(function(){
                 var user = $("#username").val();
                 var pass = $("#password").val();
-                $.post(couch_host+"/_session?callback=?","name="+user+"&password="+pass,function(r){
-                });
+                $.ajax({
+                        url: couch_host+"/_session",
+                        data: "name="+user+"&password="+pass,
+                        type:"POST",
+                        success: function(r) {
+                        },
+                        error: function(xhr,r) {
+                            alert("Invalid login, please try again.");
+                        }
+                    });
             });
         $("#register").click(function(){
             });
