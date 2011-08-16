@@ -5,6 +5,7 @@ include 'config.php';
 $user = $_POST["username"];
 $pass = $_POST["password"];
 $salt = "todoist";
+var_dump($_POST);
 
 if(strlen($user) < 1 or strlen($pass) < 1 or !preg_match("/^[a-zA-Z0-9_]+$/",$user)) {
     header("location: index.html#invalid");
@@ -27,7 +28,14 @@ if(strlen($user) < 1 or strlen($pass) < 1 or !preg_match("/^[a-zA-Z0-9_]+$/",$us
         header("location: index.html#invalid");
     }
 } else if($_POST["action"] == "Login") {
-    header("location: index.html#invalid");
+    $c = RestClient::post($couch_host."/_session",array("name"=>$user,"password"=>$pass));
+    if($c->getResponseCode() == "200") {
+        $hs = $c->getHeaders();
+        setcookie("auth",substr( $hs["cookie"],13,43));
+        header("location: index.html#login");
+    } else {
+        header("location: index.html#invalid");
+    }
 }
 
 
