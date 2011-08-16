@@ -4,9 +4,9 @@
 	<meta charset="UTF-8">
 	<title>TODO: simplest possible todo list manager</title>
     <link rel="stylesheet" href="styles.css" />
-    <script type="text/javascript">
-        console.log(document.cookie);
-    </script>
+    <script src="zepto.min.js" type="text/javascript"></script>
+    <script src="config.js" type="text/javascript"></script>
+    <script src="login.js" type="text/javascript"></script>
 </head>
 <body>
     <h1>TODO</h1>
@@ -17,7 +17,10 @@
             <legend>Register or Login</legend>
             <p><label for="username">Username:</label><input type="text" name="username" id="username" /></p>
             <p><label for="password">Password:</label><input type="text" name="password" id="password" /></p>
-            <p><input name="action" type="submit" value="Login" /><input name="action" type="submit" value="Register" /></p>
+            <p>
+                <input name="action" type="submit" value="Login" id="login" />
+                <input name="action" type="submit" value="Register" id="register"/>
+            </p>
         </fieldset>
     </form>
     <p>Download, instructions and more at <a href="http://github.com/diogok/todo">TODO github</a></p>
