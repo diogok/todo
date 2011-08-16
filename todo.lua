@@ -40,7 +40,6 @@ function done(db,n)
     for k, v in pairs(items) do
         if k == tonumber(n) then
             v[4] = "done"
-            v[2] = os.time()
             updateItem(db,v);
         end
     end
@@ -80,7 +79,7 @@ function get(couch,file)
 end
 
 function post(couch,file)
-    os.execute("curl -s -X POST ".. couch .." -d @" .. file .. " -H 'Content-Type: application/json' > /dev/null ")
+    os.execute("curl -s -X POST ".. couch .." -d @" .. file .. " -H 'Content-Type: application/json' > /dev/null")
 end
 
 function writeConfig(rc,props) 
