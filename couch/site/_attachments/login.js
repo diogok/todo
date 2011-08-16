@@ -1,7 +1,7 @@
 $(function(){
         var user = null;
-        var register_url = "http://localhost/diogo/todo/register/register.php";
-        var couch_host = "http://localhost:5984";
+        var register_url = "http://diogok.net/todo/register/register.php";
+        var couch_host   = "http://todoist.iriscouch.com";
 
         function login(user,pass) {
             $.ajax({
