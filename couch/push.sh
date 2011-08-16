@@ -1,6 +1,6 @@
 #!/bin/bash
 DEV="localhost:5984"
-PRO="manifesto.couchone.com"
+PRO="todoist.iriscouch.com"
 USER="admin"
 
 if [ "$3" != "nopass" ]; then

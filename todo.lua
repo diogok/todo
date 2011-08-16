@@ -103,14 +103,21 @@ function readConfig(rc,props)
 end
 
 function config(props)
-    os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. props["remoteCouch"] .. "/todo_master\",\"target\":\"".. props["localDb"] .."\",\"create_target\":true, \"doc_ids\":[\"_design/app\"]}' -H 'Content-Type: application/json' > /dev/null")
+    os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. props["remoteCouch"] .. "/todo_master\",\"target\":\"".. props["localDb"] .."\",\"create_target\":true, \"doc_ids\":[\"_design/app\"],\"continuous\":true}' -H 'Content-Type: application/json' > /dev/null")
+end
+
+function sync(props,user,pass)
+    local remote = "http://".. user ..":".. pass .."@".. props["remoteHost"] .. "/" .. user .. "_todo"
+    os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. remote .. "\",\"target\":\"".. props["localDb"] .."\"}' -H 'Content-Type: application/json' > /dev/null ")
+    os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. props["localDb"] .."\",\"target\":\"" .. remote .."\"}' -H 'Content-Type: application/json' > /dev/null ")
 end
 
 if arg[0] == string.sub( debug.getinfo(1,'S').source,2) then
     local defaultConfig = {
         [ "localCouch" ]= "http://localhost:5984",
         [ "localDb" ] = "todo",
-        [ "remoteCouch" ] = "http://localhost:5984"
+        [ "remoteCouch" ] = "http://todoist.iriscouch.com",
+        [ "remoteHost" ] = "todoist.iriscouch.com"
     }
     local userConfig = defaultConfig ;
 
@@ -134,6 +141,11 @@ if arg[0] == string.sub( debug.getinfo(1,'S').source,2) then
     elseif arg[1] == "-c" or arg[1] == "--config" then
         print("Ok, configuring.")
         config(userConfig)
+    elseif arg[1] == "-s" or arg[1] == "--sync" then
+        print("Ok, synchronizing.")
+        sync(userConfig,arg[2],arg[3])
+    elseif arg[1] == "-w" or arg[1] == "--web" then
+        os.execute("x-www-browser ".. userConfig["localCouch"] .. "/".. userConfig["localDb"] .. "/_design/app/index.html")
     elseif arg[1] ~= nil then
         local item = table.concat(arg," ")
         add(couchdb,item)
