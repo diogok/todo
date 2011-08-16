@@ -108,8 +108,8 @@ end
 
 function sync(props,user,pass)
     local remote = "http://".. user ..":".. pass .."@".. props["remoteHost"] .. "/" .. user .. "_todo"
-    os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. remote .. "\",\"target\":\"".. props["localDb"] .."\"}' -H 'Content-Type: application/json' > /dev/null ")
-    os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. props["localDb"] .."\",\"target\":\"" .. remote .."\"}' -H 'Content-Type: application/json' > /dev/null ")
+    os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. remote .. "\",\"target\":\"".. props["localDb"] .."\",\"continuous\":true}' -H 'Content-Type: application/json' > /dev/null ")
+    os.execute("curl -s -X POST ".. props["localCouch"] .."/_replicate -d '{\"source\":\"".. props["localDb"] .."\",\"target\":\"" .. remote .."\",\"continuous\":true}' -H 'Content-Type: application/json' > /dev/null ")
 end
 
 if arg[0] == string.sub( debug.getinfo(1,'S').source,2) then
@@ -142,8 +142,14 @@ if arg[0] == string.sub( debug.getinfo(1,'S').source,2) then
         print("Ok, configuring.")
         config(userConfig)
     elseif arg[1] == "-s" or arg[1] == "--sync" then
+        print("User:")
+        local user = io.stdin:read()
+        print("Password (will not show):")
+        os.execute("stty -echo")
+        local pass = io.stdin:read()
+        os.execute("stty echo")
         print("Ok, synchronizing.")
-        sync(userConfig,arg[2],arg[3])
+        sync(userConfig,user,pass)
     elseif arg[1] == "-w" or arg[1] == "--web" then
         os.execute("x-www-browser ".. userConfig["localCouch"] .. "/".. userConfig["localDb"] .. "/_design/app/index.html")
     elseif arg[1] ~= nil then
