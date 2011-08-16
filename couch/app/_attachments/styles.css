@@ -8,8 +8,16 @@ form {
     display: table;
 }
 
-form input {
+form input , form button{
     border: 1px #ccc solid;
     padding: 5px;
+    margin-left: 2px;
+}
+
+form button {
+    border: none;
+}
+form input {
+    width: 400px;
 }
 
