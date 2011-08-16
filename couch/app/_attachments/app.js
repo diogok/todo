@@ -41,9 +41,10 @@ $(function(){
         var id = line.id;
         var item = items[id];
         item.status = "done";
-        post(item,null);
-        delete items[id];
-        $(line).remove();
+        post(item,function(){
+            delete items[id];
+            $(line).remove();
+        });
     });
 
     $.get("_view/ordered",function(resp) {
