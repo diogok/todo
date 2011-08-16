@@ -115,7 +115,7 @@ end
 if arg[0] == string.sub( debug.getinfo(1,'S').source,2) then
     local defaultConfig = {
         [ "localCouch" ]= "http://localhost:5984",
-        [ "localDb" ] = "todo",
+        [ "localDb" ] = os.getenv("USER") .."_todo",
         [ "remoteCouch" ] = "http://todoist.iriscouch.com",
         [ "remoteHost" ] = "todoist.iriscouch.com"
     }
