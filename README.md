@@ -2,13 +2,31 @@
 
 Simplest possible TODO list management tool.
 
-## Dependencies
+## Geral
 
-todo uses local couchdb as storage, how to install:
+todo is a simple tool for managing simple todo lists. It works registering you todo items, listing it, marking itens done and synchronizing it with diferents machine and the cloud.
 
-    $ sudo aptitude install couchdb
+You can use the standalone command-line (CLI) version (see below), the web version an soon mobile versions of it. To be able to sync your machines you must register on [online todo list](http://todoist.iriscouch.com/todo_master/_design/site/index.html) and them you are ready to go.
 
-## Installing 
+Built with CouchDB, zepto.js and Lua.
+
+## Web
+
+To access the web version of your [online todo list](http://todoist.iriscouch.com/todo_master/_design/site/index.html), there you can either register or login.
+
+Once you register you have you database created and web app replicated, and will be able to sync different machines.
+
+On login you will be redirected to your specific databse.
+
+## Desktop (CLI)
+
+### Dependencies
+
+todo uses local couchdb as storage, and curl to comunicate with it, how to install:
+
+    $ sudo aptitude install couchdb curl
+
+### Installing 
 
 Download [todo](http://github.com/diogok/todo/raw/master/todo.lua), put it in your path and add executable permission:
 
@@ -20,7 +38,9 @@ You must configure it so it creates the databases needed, only on first run (con
 
     $ todo -c
 
-## Usage
+This will create a database for your user and download need data from the web.
+
+### Usage
 
 To add an item:
     
@@ -35,5 +55,12 @@ To "done" an item:
     
     $ todo -d 01
 
-That's it(for now...)!
+To open a nice interface on browser:
 
+    $ todo -w
+
+To sinchronize with web version (will ask for username and password):
+
+    $ todo -s 
+
+That's it(for now...)!
