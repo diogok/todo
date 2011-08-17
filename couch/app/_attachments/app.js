@@ -6,7 +6,8 @@ $(function(){
 
     function ins(item) {
         items[item._id] = item;
-        var date = new Date(item.timestamp);
+        var date = new Date(item.timestamp * 1000);
+        console.log(item.timestamp);
         var dateStr = date.getMonth()+"/"+date.getDay()+" "+date.getHours()+":"+date.getMinutes();
         var html = "<li id='"+item._id+"'>";
         html += "<span class='date'>"+dateStr+"</span> ";
@@ -29,7 +30,7 @@ $(function(){
     $("#add").click(function(){
         var content = $("#input").val();
         if(content.length < 1) return;
-        var item = {content: content, timestamp: new Date().getTime(), status: "todo" };
+        var item = {content: content, timestamp: new Date().getTime()/1000, status: "todo" };
         post(item, function(r) {
             item._rev = r.rev;
             item._id  = r.id;
@@ -42,7 +43,7 @@ $(function(){
         var id = line.id;
         var item = items[id];
         item.status = "done";
-        item.done_timestamp = new Date().getTime();
+        item.done_timestamp = new Date().getTime()/1000;
         post(item,function(){
             delete items[id];
             $(line).remove();
