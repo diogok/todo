@@ -20,6 +20,8 @@ Once you register you will have your database created and the web app replicated
 
 On login you will be redirected to your specific database.
 
+Changes on your database will appear live on the app, no need to refresh.
+
 ## Desktop (CLI)
 
 ### Dependencies
