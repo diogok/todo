@@ -26,9 +26,9 @@ Changes on your database will appear live on the app, no need to refresh.
 
 ### Dependencies
 
-todo uses local couchdb as storage, and curl to comunicate with it, here is how to install both:
+todo is written in lua, uses local couchdb as storage, and curl to comunicate with it, here is how to install both:
 
-    $ sudo aptitude install couchdb curl
+    $ sudo aptitude install couchdb curl lua5.1
 
 ### Installing 
 
