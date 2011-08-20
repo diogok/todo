@@ -35,6 +35,7 @@ $(function(){
             item._rev = data.rev;
             item._id  = data.id;
             ins(item);
+            $("#input").val("");
         });
     });
 
