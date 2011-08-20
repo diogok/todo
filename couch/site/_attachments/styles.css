@@ -7,7 +7,7 @@ form {
     display: table;
 }
 
-form input {
+form input, form button {
     border: 1px #ccc solid;
     padding: 5px;
     width: 50%;

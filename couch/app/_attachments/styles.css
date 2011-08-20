@@ -6,6 +6,7 @@ body {
 
 form {
     display: table;
+    min-width: 340px;
 }
 
 input , button{
@@ -17,10 +18,11 @@ input , button{
 button {
     border: none;
     width: 65px;
+    margin-left: 2px;
 }
 
 input {
-    width: 400px;
+    width: 250px;
 }
 
 ul {
@@ -36,7 +38,7 @@ ul li {
     clear: both;
     display: table;
     margin: 8px 0 0 5px;
-    width: 475px;
+    width: 335px;
 }
 
 .content {

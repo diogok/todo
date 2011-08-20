@@ -1,0 +1,20 @@
+button {
+    font-family: "Helvetica Neue", Helvetica, sans-serif;
+  font-size: 1.3em;
+  font-weight: bold;
+  width: 97%;
+  height: 30px;
+  border: 3px solid #aaa;
+  background: -webkit-gradient( linear, left top, left bottom, from(#e2e2e2), to(#8c8a88), color-stop(0.5, #acadae), color-stop(0.5, #82807e) );
+  margin: 0 0 3px 0;
+  text-shadow: 0px 1px 0 #cecece;
+  -webkit-background-origin: padding-box;
+  -webkit-background-clip: border-box;
+  -webkit-border-radius: 8px;
+  color: #454;
+  cursor: pointer;
+}
+
+button:hover {
+    background: -webkit-gradient( linear, left top, left bottom, from(#f2f2f2), to(#9c9a98), color-stop(0.5, #bcbdbe), color-stop(0.5, #92909e) );
+}
